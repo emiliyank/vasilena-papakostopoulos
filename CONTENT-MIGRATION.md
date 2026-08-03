@@ -8,7 +8,7 @@ Base CDN: `https://static.wixstatic.com/media/`
 
 | Asset role | Temporary media id | Replacement status |
 | --- | --- | --- |
-| Site logo / favicon | `8a77d8_e1ca566d2cb94082bf74c562009b37a3~mv2.png` | pending |
+| Site logo / favicon | `8a77d8_e1ca566d2cb94082bf74c562009b37a3~mv2.png` → copied to `public/brand/logo.png` | pending original |
 | About portrait | `8a77d8_74b19c928d384f098a3ccd76864aa169~mv2.png` | pending |
 | Hero / portfolio cover set | `8a77d8_8e03881a880541beaaf621b2654edf31~mv2.png` | pending |
 | Portfolio cover | `8a77d8_1962249a003c483d88ecd88f30677bf3~mv2.png` | pending |
@@ -29,8 +29,8 @@ Base CDN: `https://static.wixstatic.com/media/`
 | Services (5) | migrated draft | provisional | |
 | Projects (8) | migrated draft | provisional | Form, Balance, Rhythm, Variations, Scale, Heritage, Unity, Potential |
 | Blog posts | pending crawl | pending | |
-| Prices | pending | pending | IA undecided |
-| Consultation survey URL | pending confirmation | — | keep external |
+| Consultation survey URL | confirmed | — | https://docs.google.com/forms/d/10-k1YJ33jze-Rqq_tgzdT4KgvFDKSjsr1NXKvU7BsLo/viewform |
+| Prices | migrated draft from Wix | provisional EN | Source: https://papakostopoulosvs.wixsite.com/vassilena-papakost-1/services-4 |
 
 ## Redirect inventory
 

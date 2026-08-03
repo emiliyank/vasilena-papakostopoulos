@@ -37,17 +37,21 @@ export const mockSiteSettings: SiteSettings = {
     en: "North-West Bulgaria",
     bg: "Северозападна България",
   },
-  instagramUrl: "https://www.instagram.com/",
-  facebookUrl: "https://www.facebook.com/",
-  surveyUrl: "https://papakostopoulosvs.wixsite.com/portfolio",
-  logo: temporaryWixAsset(
-    "logo",
-    "8a77d8_e1ca566d2cb94082bf74c562009b37a3~mv2.png",
-    "Vassilena Papakostopoulos",
-    "Василена Папакостопулос",
-    240,
-    240,
-  ),
+  instagramUrl: "https://www.instagram.com/vassilenapapakostopoulos/",
+  facebookUrl: "https://www.facebook.com/vassilena.papakostopoulos/",
+  surveyUrl:
+    "https://docs.google.com/forms/d/10-k1YJ33jze-Rqq_tgzdT4KgvFDKSjsr1NXKvU7BsLo/viewform",
+  logo: {
+    id: "logo",
+    src: "/brand/logo.png",
+    width: 256,
+    height: 256,
+    alt: {
+      en: "Vassilena Papakostopoulos",
+      bg: "Василена Папакостопулос",
+    },
+    temporarySource: true,
+  },
   heroImage: temporaryWixAsset(
     "hero",
     "8a77d8_8e03881a880541beaaf621b2654edf31~mv2.png",

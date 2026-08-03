@@ -1,4 +1,4 @@
-import type { BlogPost, PriceItem } from "@/types/content";
+import type { BlogPost } from "@/types/content";
 import type { RichTextDocument } from "@/types/rich-text";
 
 const sampleBodyEn: RichTextDocument = {
@@ -70,19 +70,5 @@ export const mockBlogPosts: BlogPost[] = [
       bg: "Как кратката анкета помага да се изяснят приоритетите преди дизайнерски разговор.",
     },
     body: { en: sampleBodyEn, bg: sampleBodyBg },
-  },
-];
-
-export const mockPrices: PriceItem[] = [
-  {
-    id: "price-consultation",
-    status: "published",
-    order: 1,
-    name: { en: "Interior consultation", bg: "Интериорна консултация" },
-    description: {
-      en: "Focused guidance on layout, materials, colour and lighting.",
-      bg: "Насоки за разпределение, материали, цвят и осветление.",
-    },
-    priceDisplay: { en: "On request", bg: "При запитване" },
   },
 ];

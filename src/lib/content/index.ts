@@ -1,10 +1,12 @@
-import { mockBlogPosts, mockPrices } from "@/data/mocks/blog";
+import { mockBlogPosts } from "@/data/mocks/blog";
+import { mockPrices, mockPricesPageContent } from "@/data/mocks/prices";
 import { mockProjects } from "@/data/mocks/projects";
 import { mockServices } from "@/data/mocks/services";
 import { mockSiteSettings } from "@/data/mocks/settings";
 import type {
   BlogPost,
   PriceItem,
+  PricesPageContent,
   Project,
   Service,
   SiteSettings,
@@ -66,4 +68,8 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
 
 export async function getPrices(): Promise<PriceItem[]> {
   return byOrder(publishedOnly(mockPrices));
+}
+
+export async function getPricesPageContent(): Promise<PricesPageContent> {
+  return mockPricesPageContent;
 }

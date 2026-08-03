@@ -45,6 +45,11 @@ export async function generateMetadata({
   return {
     title: dictionary.meta.siteTitle,
     description: dictionary.meta.siteDescription,
+    icons: {
+      icon: [{ url: "/brand/logo.png", type: "image/png" }],
+      apple: [{ url: "/brand/logo.png" }],
+      shortcut: ["/brand/logo.png"],
+    },
   };
 }
 
@@ -69,6 +74,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         <Header
           locale={locale}
           brandName={settings.brandName}
+          logo={settings.logo}
           dictionary={dictionary}
           surveyUrl={settings.surveyUrl}
         />

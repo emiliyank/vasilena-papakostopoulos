@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useId, useState } from "react";
 
@@ -8,15 +9,23 @@ import { Container } from "@/components/ui/Container";
 import type { Locale } from "@/lib/i18n/config";
 import type { AppDictionary } from "@/lib/i18n/dictionaries";
 import { blogPath, homePath, pricesPath, sectionPath } from "@/lib/i18n/paths";
+import type { MediaAsset } from "@/types/content";
 
 type HeaderProps = {
   locale: Locale;
   brandName: string;
+  logo?: MediaAsset;
   dictionary: AppDictionary;
   surveyUrl: string;
 };
 
-export function Header({ locale, brandName, dictionary, surveyUrl }: HeaderProps) {
+export function Header({
+  locale,
+  brandName,
+  logo,
+  dictionary,
+  surveyUrl,
+}: HeaderProps) {
   const [open, setOpen] = useState(false);
   const menuId = useId();
 
@@ -42,9 +51,22 @@ export function Header({ locale, brandName, dictionary, surveyUrl }: HeaderProps
       <Container className="flex h-16 items-center justify-between gap-4 sm:h-20">
         <Link
           href={homePath(locale)}
-          className="font-[family-name:var(--font-display)] text-lg tracking-[0.02em] text-[var(--color-ink)] sm:text-xl"
+          className="flex items-center gap-3 text-[var(--color-ink)] transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-ink)]"
         >
-          {brandName}
+          {logo ? (
+            <Image
+              src={logo.src}
+              alt=""
+              width={48}
+              height={48}
+              className="h-10 w-10 shrink-0 rounded-full sm:h-12 sm:w-12"
+              priority
+              aria-hidden
+            />
+          ) : null}
+          <span className="font-[family-name:var(--font-display)] text-base tracking-[0.02em] sm:text-lg">
+            {brandName}
+          </span>
         </Link>
 
         <div className="flex items-center gap-4">

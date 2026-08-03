@@ -71,7 +71,15 @@ export type PriceItem = {
   name: LocalizedString;
   description: LocalizedString;
   priceDisplay: LocalizedString;
+  features?: LocalizedString[];
   notes?: LocalizedString;
+};
+
+export type PricesPageContent = {
+  heading: LocalizedString;
+  intro: LocalizedString;
+  paymentHeading: LocalizedString;
+  paymentTerms: LocalizedString[];
 };
 
 export type SiteSettings = {
