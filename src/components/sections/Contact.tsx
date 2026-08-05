@@ -35,7 +35,7 @@ export function Contact({ locale, settings, dictionary }: ContactProps) {
           </div>
         </div>
 
-        <ContactForm dictionary={dictionary} />
+        <ContactForm locale={locale} dictionary={dictionary} />
       </Container>
     </section>
   );

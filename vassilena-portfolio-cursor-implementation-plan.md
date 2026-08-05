@@ -2,7 +2,7 @@
 
 ## Cursor Implementation Plan
 
-**Progress note (2026-08-04):** Phase A complete. Phase B Airtable **code layer** is in place (client, normalization, caching, content switching). Create the base/tables from `AIRTABLE-SCHEMA.md`, then set `CONTENT_SOURCE=airtable` in `.env.local`.
+**Progress note (2026-08-05):** Phase A–B complete (including Airtable schema + seeded mocks). Phase C lightbox/gallery polish and Phase D contact + SEO foundations are in progress / landed. Analytics/consent remain deferred.
 
 ## Source website and migration reference
 
@@ -17,7 +17,7 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 - [x] Add the complete source URL to the project README and Cursor project context.
 - [x] Use the complete `/portfolio` URL for all visual comparisons and content audits.
 - [x] Treat the Wix site as a migration reference, not as an API or runtime dependency of the new website.
-- [ ] Record every migrated Wix page and its corresponding new URL in the redirect inventory.
+- [x] Record every migrated Wix page and its corresponding new URL in the redirect inventory.
 
 ### 1. Confirmed product scope
 
@@ -27,9 +27,9 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 - [x] Keep the primary website as a **single-page homepage**.
 - [x] Retain project detail pages as separate routes.
 - [x] Include the current Blog, Prices, consultation survey, contact form, and service content.
-- [ ] Use **Airtable** as the initial external content source.
+- [x] Use **Airtable** as the initial external content source.
 - [x] Use **Next.js App Router**, TypeScript, and Vercel-compatible server functionality.
-- [ ] Send contact-form messages to `e.kadiyski@gmail.com` using Resend by default, with Brevo documented as the alternative.
+- [x] Send contact-form messages to `e.kadiyski@gmail.com` using Resend by default, with Brevo documented as the alternative.
 - [ ] Include Google Analytics, Microsoft Clarity, SEO metadata, sitemap generation, and redirect planning.
 - [x] Exclude Vercel account and deployment setup from the implementation scope.
 
@@ -44,7 +44,7 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 - [x] Implement localized Prices pages or sections based on the final content review.
 - [x] Keep the consultation survey as a clearly labeled external link unless it is intentionally rebuilt later.
 - [x] Add language switching that preserves the equivalent route and content item where possible.
-- [ ] Return a localized 404 page when a project or article is unavailable.
+- [x] Return a localized 404 page when a project or article is unavailable.
 - [x] Add previous/next project navigation derived from an explicit Airtable sort order.
 
 ### 3. Repository initialization
@@ -65,13 +65,13 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 - [x] Create localized project and blog route folders under `src/app/[locale]`.
 - [x] Create `src/components/layout` for header, menu, language switcher, and footer.
 - [x] Create `src/components/sections` for Hero, About, Services, Portfolio, Contact, and other homepage sections.
-- [ ] Create `src/components/projects` for cards, metadata, gallery, and project navigation.
+- [x] Create `src/components/projects` for cards, metadata, gallery, and project navigation.
 - [ ] Create `src/components/blog` for article cards and article rendering.
-- [ ] Create `src/components/ui` for reusable buttons, headings, form controls, modal/lightbox, and loading states.
+- [x] Create `src/components/ui` for reusable buttons, headings, form controls, modal/lightbox, and loading states.
 - [x] Create `src/lib/airtable` for the Airtable client, queries, normalization, caching, and error handling.
 - [x] Create `src/lib/i18n` for locale configuration, helpers, and localized URL generation.
-- [ ] Create `src/lib/email` for the email provider abstraction and templates.
-- [ ] Create `src/lib/seo` for metadata, canonical URLs, structured data, sitemap helpers, and redirects.
+- [x] Create `src/lib/email` for the email provider abstraction and templates.
+- [x] Create `src/lib/seo` for metadata, canonical URLs, structured data, sitemap helpers, and redirects.
 - [x] Create `src/types` for normalized content models independent of Airtable's response format.
 
 ### 5. Airtable base design
@@ -369,14 +369,14 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 - [x] Implement project detail routes and galleries.
 - [x] Implement localized blog and Prices experiences.
 - [x] Implement the language switcher and content fallbacks.
-- [ ] Complete responsive styling and motion.
+- [x] Complete responsive styling and motion.
 
 #### Phase D — Contact and integrations
 
-- [ ] Implement and secure the contact form.
-- [ ] Configure and test Resend or Brevo.
+- [x] Implement and secure the contact form.
+- [x] Configure and test Resend or Brevo.
 - [ ] Add Google Analytics, Microsoft Clarity, and consent controls.
-- [ ] Add metadata, structured data, sitemap, robots, and redirects.
+- [x] Add metadata, structured data, sitemap, robots, and redirects.
 
 #### Phase E — Migration and quality assurance
 

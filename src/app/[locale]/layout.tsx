@@ -5,9 +5,11 @@ import type { ReactNode } from "react";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { ProfessionalServiceJsonLd } from "@/components/seo/ProfessionalServiceJsonLd";
 import { getSiteSettings } from "@/lib/content";
 import { isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const display = Cormorant_Garamond({
   subsets: ["latin", "cyrillic"],
@@ -43,8 +45,11 @@ export async function generateMetadata({
   }
   const dictionary = getDictionary(rawLocale);
   return {
-    title: dictionary.meta.siteTitle,
-    description: dictionary.meta.siteDescription,
+    ...buildPageMetadata({
+      locale: rawLocale,
+      title: dictionary.meta.siteTitle,
+      description: dictionary.meta.siteDescription,
+    }),
     icons: {
       icon: [{ url: "/brand/logo.png", type: "image/png" }],
       apple: [{ url: "/brand/logo.png" }],
@@ -65,6 +70,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   return (
     <html lang={locale} className={`${display.variable} ${body.variable} h-full`}>
       <body className="flex min-h-full flex-col antialiased">
+        <ProfessionalServiceJsonLd locale={locale} settings={settings} />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-[var(--color-bg)] focus:px-4 focus:py-2 focus:text-[var(--color-ink)]"

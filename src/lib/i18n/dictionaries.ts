@@ -39,7 +39,12 @@ type Dictionary = {
     email: string;
     message: string;
     submit: string;
+    submitting: string;
     privacyNote: string;
+    success: string;
+    error: string;
+    validationError: string;
+    rateLimited: string;
   };
   footer: {
     backToTop: string;
@@ -52,6 +57,11 @@ type Dictionary = {
     location: string;
     type: string;
     date: string;
+    openImage: string;
+    closeLightbox: string;
+    previousImage: string;
+    nextImage: string;
+    imageOf: string;
   };
   blog: {
     heading: string;
@@ -114,8 +124,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
       email: "Email",
       message: "Write a message",
       submit: "Submit",
+      submitting: "Sending…",
       privacyNote:
         "By submitting this form you agree to be contacted about your inquiry.",
+      success: "Thank you. Your message has been sent.",
+      error: "Something went wrong. Please try again later.",
+      validationError: "Please check the highlighted fields and try again.",
+      rateLimited: "Too many requests. Please wait a moment and try again.",
     },
     footer: {
       backToTop: "Back to top",
@@ -128,6 +143,11 @@ export const dictionaries: Record<Locale, Dictionary> = {
       location: "Location",
       type: "Type",
       date: "Date",
+      openImage: "Open image",
+      closeLightbox: "Close",
+      previousImage: "Previous image",
+      nextImage: "Next image",
+      imageOf: "of",
     },
     blog: {
       heading: "Blog",
@@ -188,8 +208,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
       email: "Имейл",
       message: "Напишете съобщение",
       submit: "Изпрати",
+      submitting: "Изпращане…",
       privacyNote:
         "С изпращането на формуляра се съгласявате да бъдете свързани относно вашето запитване.",
+      success: "Благодарим ви. Съобщението е изпратено.",
+      error: "Възникна грешка. Моля, опитайте отново по-късно.",
+      validationError: "Моля, проверете маркираните полета и опитайте отново.",
+      rateLimited: "Твърде много опити. Моля, изчакайте малко и опитайте отново.",
     },
     footer: {
       backToTop: "Към началото",
@@ -202,6 +227,11 @@ export const dictionaries: Record<Locale, Dictionary> = {
       location: "Локация",
       type: "Тип",
       date: "Дата",
+      openImage: "Отвори изображение",
+      closeLightbox: "Затвори",
+      previousImage: "Предишно изображение",
+      nextImage: "Следващо изображение",
+      imageOf: "от",
     },
     blog: {
       heading: "Блог",
