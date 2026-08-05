@@ -9,9 +9,9 @@
 ## Stack
 
 - Next.js App Router, TypeScript (`strict`), Tailwind CSS v4, npm
-- Content: mock data first; Airtable in Phase B (server-only credentials)
+- Content: mock data or Airtable (`CONTENT_SOURCE`); see `AIRTABLE-SCHEMA.md`
 - Email: Resend → `e.kadiyski@gmail.com`
-- Blog bodies: Airtable rich text → normalized block model
+- Blog bodies: Airtable rich text (Markdown via API) → normalized block model
 - Project galleries: alternating rows + accessible lightbox
 
 ## Architecture rules

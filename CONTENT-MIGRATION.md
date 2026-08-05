@@ -29,8 +29,9 @@ Base CDN: `https://static.wixstatic.com/media/`
 | Services (5) | migrated draft | provisional | |
 | Projects (8) | migrated draft | provisional | Form, Balance, Rhythm, Variations, Scale, Heritage, Unity, Potential |
 | Blog posts | pending crawl | pending | |
+| Prices | migrated to Airtable from Wix/mocks | provisional EN | Source: https://papakostopoulosvs.wixsite.com/vassilena-papakost-1/services-4 |
 | Consultation survey URL | confirmed | — | https://docs.google.com/forms/d/10-k1YJ33jze-Rqq_tgzdT4KgvFDKSjsr1NXKvU7BsLo/viewform |
-| Prices | migrated draft from Wix | provisional EN | Source: https://papakostopoulosvs.wixsite.com/vassilena-papakost-1/services-4 |
+| Initial Airtable records | seeded from mocks | provisional | Via `scripts/seed-airtable-from-mocks.mjs` |
 
 ## Redirect inventory
 

@@ -2,7 +2,7 @@
 
 ## Cursor Implementation Plan
 
-**Progress note (2026-08-03):** Phase A — Foundation is complete. Homepage, localized routes, mock content, design system, and docs are in place. Phase B (Airtable) is next. Several later-phase shells (blog/prices/project pages) were started early with mocks.
+**Progress note (2026-08-04):** Phase A complete. Phase B Airtable **code layer** is in place (client, normalization, caching, content switching). Create the base/tables from `AIRTABLE-SCHEMA.md`, then set `CONTENT_SOURCE=airtable` in `.env.local`.
 
 ## Source website and migration reference
 
@@ -54,7 +54,7 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 - [x] Enable strict TypeScript settings.
 - [x] Configure absolute imports such as `@/components`, `@/lib`, and `@/types`.
 - [x] Create `.env.example` containing names only, never real secrets.
-- [ ] Add environment validation for Airtable, email, analytics, and site URL values.
+- [x] Add environment validation for Airtable, email, analytics, and site URL values.
 - [x] Add formatting and lint scripts.
 - [x] Add `typecheck`, `test`, and production `build` scripts.
 - [x] Add a concise README covering local setup, Airtable configuration, content editing, image workflow, and required environment variables.
@@ -68,7 +68,7 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 - [ ] Create `src/components/projects` for cards, metadata, gallery, and project navigation.
 - [ ] Create `src/components/blog` for article cards and article rendering.
 - [ ] Create `src/components/ui` for reusable buttons, headings, form controls, modal/lightbox, and loading states.
-- [ ] Create `src/lib/airtable` for the Airtable client, queries, normalization, caching, and error handling.
+- [x] Create `src/lib/airtable` for the Airtable client, queries, normalization, caching, and error handling.
 - [x] Create `src/lib/i18n` for locale configuration, helpers, and localized URL generation.
 - [ ] Create `src/lib/email` for the email provider abstraction and templates.
 - [ ] Create `src/lib/seo` for metadata, canonical URLs, structured data, sitemap helpers, and redirects.
@@ -142,19 +142,19 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 ### 6. Airtable integration layer
 
 - [ ] Create a read-only Airtable personal access token with the minimum required base permissions.
-- [ ] Store the token, base ID, and table identifiers as server-only environment variables.
-- [ ] Never expose Airtable credentials through `NEXT_PUBLIC_*` variables.
-- [ ] Fetch Airtable only from server components, server utilities, route handlers, or build-time processes.
+- [x] Store the token, base ID, and table identifiers as server-only environment variables.
+- [x] Never expose Airtable credentials through `NEXT_PUBLIC_*` variables.
+- [x] Fetch Airtable only from server components, server utilities, route handlers, or build-time processes.
 - [x] Create normalized TypeScript models for Project, ProjectImage, Service, BlogPost, PriceItem, and SiteSettings.
-- [ ] Convert Airtable records into normalized models in one adapter layer.
-- [ ] Validate all normalized data with Zod or an equivalent runtime schema.
+- [x] Convert Airtable records into normalized models in one adapter layer.
+- [x] Validate all normalized data with Zod or an equivalent runtime schema.
 - [x] Filter public queries to Published records only.
 - [x] Sort projects, images, services, and prices using explicit numeric fields.
 - [x] Add clear handling for missing Bulgarian or English translations.
-- [ ] Add request caching/revalidation so normal page views do not query Airtable unnecessarily.
-- [ ] Choose an initial revalidation interval, provisionally 5–15 minutes.
+- [x] Add request caching/revalidation so normal page views do not query Airtable unnecessarily.
+- [x] Choose an initial revalidation interval, provisionally 5–15 minutes.
 - [ ] Add an optional protected revalidation webhook as a later enhancement.
-- [ ] Handle Airtable errors with cached or graceful UI states rather than leaking raw provider errors.
+- [x] Handle Airtable errors with cached or graceful UI states rather than leaking raw provider errors.
 - [x] Add fixtures or mock data so development and automated tests do not require live Airtable access.
 
 ### 7. Initial content migration
@@ -358,10 +358,10 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 
 #### Phase B — Airtable
 
-- [ ] Create the Airtable schema and sample records.
-- [ ] Implement secure server-side Airtable queries.
-- [ ] Implement normalization, validation, sorting, caching, and mocks.
-- [ ] Connect projects, services, settings, blog posts, and prices one content type at a time.
+- [x] Create the Airtable schema and sample records.
+- [x] Implement secure server-side Airtable queries.
+- [x] Implement normalization, validation, sorting, caching, and mocks.
+- [x] Connect projects, services, settings, blog posts, and prices one content type at a time.
 
 #### Phase C — Core experience
 

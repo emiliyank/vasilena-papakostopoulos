@@ -10,7 +10,7 @@ Resolved product and technical choices for the Vassilena Papakostopoulos portfol
 | Project gallery | Alternating rows | Full-width and paired half-width rows via `layoutSpan`; lightbox deferred to Phase C polish |
 | Project lightbox | Yes | Accessible overlay with prev/next and Escape (shell gallery first; lightbox next) |
 | Package manager | npm | Commit `package-lock.json` |
-| Content source (dev) | Mock data first | Wire live Airtable in Phase B |
+| Content source (dev) | Mock by default; Airtable optional | Set `CONTENT_SOURCE=airtable` after schema + PAT; see `AIRTABLE-SCHEMA.md` |
 | Cookie consent | Deferred | Add before analytics go live in production markets |
 | Temporary images | Wix-hosted assets | Track replacements in `CONTENT-MIGRATION.md` |
 | Prices IA | Pending | Dedicated pages vs homepage section — decide later |
