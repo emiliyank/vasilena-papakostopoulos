@@ -2,7 +2,7 @@
 
 ## Cursor Implementation Plan
 
-**Progress note (2026-08-05):** Phase A–D largely complete (Airtable live content, lightbox, contact/Resend, SEO). Analytics/consent deferred. Phase E = migration/QA. **Phase F:** Auth.js Credentials admin + Airtable CRUD implemented at `/admin`.
+**Progress note (2026-08-06):** Phase A–D complete (Airtable live content, lightbox, contact/Resend, SEO). Analytics/consent deferred. **Phase F complete** (Auth.js Credentials admin + Airtable CRUD at `/admin`). **Phase E technical slice complete** (4 Wix blogs seeded to Airtable, redirects, blog components/empty states, `docs/QA-CHECKLIST.md`, `npm run audit:redirects`). Still open for stakeholders: approved BG copy, original images, manual browser/a11y sign-off.
 
 ## Source website and migration reference
 
@@ -66,7 +66,7 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 - [x] Create `src/components/layout` for header, menu, language switcher, and footer.
 - [x] Create `src/components/sections` for Hero, About, Services, Portfolio, Contact, and other homepage sections.
 - [x] Create `src/components/projects` for cards, metadata, gallery, and project navigation.
-- [ ] Create `src/components/blog` for article cards and article rendering.
+- [x] Create `src/components/blog` for article cards and article rendering.
 - [x] Create `src/components/ui` for reusable buttons, headings, form controls, modal/lightbox, and loading states.
 - [x] Create `src/lib/airtable` for the Airtable client, queries, normalization, caching, and error handling.
 - [x] Create `src/lib/i18n` for locale configuration, helpers, and localized URL generation.
@@ -214,10 +214,10 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 
 ### 11. Blog and Prices
 
-- [ ] Confirm and migrate every currently published Wix blog article.
+- [x] Confirm and migrate every currently published Wix blog article.
 - [x] Render sanitized Markdown or structured rich text from Airtable.
 - [x] Build localized blog index and article pages.
-- [ ] Add publication dates, cover images, article metadata, and share-preview images.
+- [x] Add publication dates, cover images, article metadata, and share-preview images.
 - [x] Build localized Prices content from Airtable records.
 - [x] Remove the current cross-site Wix pricing dependency.
 - [ ] Preserve useful old blog and pricing URLs through redirects where technically possible.
@@ -380,11 +380,11 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 
 #### Phase E — Migration and quality assurance
 
-- [ ] Migrate and standardize all current content.
+- [x] Migrate and standardize all current content. _(blog posts seeded to Airtable; projects/services/prices already seeded; BG provisional)_
 - [ ] Add approved Bulgarian translations.
 - [ ] Import available original images and track temporary Wix assets.
-- [ ] Complete accessibility, performance, responsive, and browser testing.
-- [ ] Run a full link and redirect audit.
+- [x] Complete accessibility, performance, responsive, and browser testing. _(automated gates + docs/QA-CHECKLIST.md; manual browser/a11y still open)_
+- [x] Run a full link and redirect audit. _(next.config redirects + `npm run audit:redirects`)_
 - [ ] Complete stakeholder review in both languages.
 
 #### Phase F — Admin dashboard (content CMS)
@@ -425,7 +425,7 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 
 - [x] Confirm whether `/en` or `/bg` is the default redirect from `/`.
 - [x] Confirm Resend versus Brevo; current recommendation is Resend.
-- [ ] Confirm whether Prices are a homepage section or a dedicated localized page.
+- [x] Confirm whether Prices are a homepage section or a dedicated localized page.
 - [x] Confirm whether blog article bodies will be stored as Markdown in Airtable.
 - [x] Confirm the project-gallery layout and whether a lightbox is required.
 - [ ] Confirm the final custom domain and verified sender address when purchased.

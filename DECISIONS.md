@@ -13,7 +13,7 @@ Resolved product and technical choices for the Vassilena Papakostopoulos portfol
 | Content source (dev) | Airtable when configured | `CONTENT_SOURCE=airtable`; mocks remain as fallback |
 | Cookie consent | Deferred | Add before analytics go live in production markets |
 | Temporary images | Wix-hosted assets | Track replacements in `CONTENT-MIGRATION.md` |
-| Prices IA | Pending | Dedicated pages vs homepage section — decide later |
+| Prices IA | Dedicated localized pages | `/en/prices` and `/bg/prices` (not homepage-only) |
 | Custom domain / sender | Pending | Needed before production email |
 | Airtable as long-term media store | Pending | Attachments OK for migration; revisit durability |
 | Bulgarian copy approval | Pending | Confirm stakeholder before launch |

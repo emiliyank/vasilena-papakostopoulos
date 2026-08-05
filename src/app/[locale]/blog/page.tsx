@@ -1,15 +1,28 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ArticleCard } from "@/components/blog/ArticleCard";
 import { Container } from "@/components/ui/Container";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { getBlogPosts } from "@/lib/content";
-import { getLocalizedValue, isLocale, type Locale } from "@/lib/i18n/config";
+import { isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { blogPostPath } from "@/lib/i18n/paths";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 type BlogIndexProps = {
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: BlogIndexProps) {
+  const { locale: rawLocale } = await params;
+  if (!isLocale(rawLocale)) return {};
+  const dictionary = getDictionary(rawLocale);
+  return buildPageMetadata({
+    locale: rawLocale,
+    title: dictionary.blog.heading,
+    description: dictionary.meta.siteDescription,
+    path: "/blog",
+  });
+}
 
 export default async function BlogIndexPage({ params }: BlogIndexProps) {
   const { locale: rawLocale } = await params;
@@ -26,23 +39,21 @@ export default async function BlogIndexPage({ params }: BlogIndexProps) {
         <h1 className="font-[family-name:var(--font-display)] text-5xl text-[var(--color-ink)]">
           {dictionary.blog.heading}
         </h1>
-        <ul className="mt-12 divide-y divide-[var(--color-line)]">
-          {posts.map((post) => (
-            <li key={post.id} className="py-8">
-              <Link href={blogPostPath(locale, post.slug)} className="group block">
-                <h2 className="font-[family-name:var(--font-display)] text-3xl text-[var(--color-ink)] transition-opacity group-hover:opacity-70">
-                  {getLocalizedValue(post.title, locale)}
-                </h2>
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--color-muted)]">
-                  {getLocalizedValue(post.excerpt, locale)}
-                </p>
-                <span className="mt-4 inline-block text-xs tracking-[0.12em] uppercase">
-                  {dictionary.blog.readMore}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {posts.length === 0 ? (
+          <EmptyState title={dictionary.blog.emptyTitle} body={dictionary.blog.emptyBody} />
+        ) : (
+          <ul className="mt-12 divide-y divide-[var(--color-line)]">
+            {posts.map((post) => (
+              <li key={post.id}>
+                <ArticleCard
+                  post={post}
+                  locale={locale}
+                  readMoreLabel={dictionary.blog.readMore}
+                />
+              </li>
+            ))}
+          </ul>
+        )}
       </Container>
     </main>
   );

@@ -67,9 +67,13 @@ type Dictionary = {
     heading: string;
     readMore: string;
     backToBlog: string;
+    emptyTitle: string;
+    emptyBody: string;
   };
   prices: {
     heading: string;
+    emptyTitle: string;
+    emptyBody: string;
   };
   notFound: {
     title: string;
@@ -153,9 +157,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
       heading: "Blog",
       readMore: "Read more",
       backToBlog: "Back to blog",
+      emptyTitle: "No articles yet",
+      emptyBody: "Published articles will appear here once they are available.",
     },
     prices: {
       heading: "Prices",
+      emptyTitle: "Prices coming soon",
+      emptyBody: "Published pricing packages will appear here once they are available.",
     },
     notFound: {
       title: "Page not found",
@@ -237,9 +245,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
       heading: "Блог",
       readMore: "Прочетете повече",
       backToBlog: "Към блога",
+      emptyTitle: "Все още няма статии",
+      emptyBody: "Публикуваните статии ще се появят тук, когато са налични.",
     },
     prices: {
       heading: "Цени",
+      emptyTitle: "Цените предстоят",
+      emptyBody: "Публикуваните ценови пакети ще се появят тук, когато са налични.",
     },
     notFound: {
       title: "Страницата не е намерена",

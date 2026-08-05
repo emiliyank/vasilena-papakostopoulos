@@ -14,12 +14,23 @@
  *   Never deletes records.
  */
 
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
 const APPLY = process.argv.includes("--apply");
 const baseId = process.env.AIRTABLE_BASE_ID;
 const pat =
   process.env.AIRTABLE_SEED_PAT ||
   process.env.AIRTABLE_PAT ||
   process.env.AIRTABLE_SETUP_PAT;
+
+const blogPosts = JSON.parse(
+  readFileSync(
+    join(dirname(fileURLToPath(import.meta.url)), "../src/data/seeds/blog-posts.json"),
+    "utf8",
+  ),
+);
 
 if (!baseId || !/^app[A-Za-z0-9]+$/.test(baseId)) {
   fail("Missing or invalid AIRTABLE_BASE_ID.");
@@ -290,25 +301,6 @@ const prices = [
     "Price Display BG": "50 Евро/м2",
     "Features EN": "",
     "Features BG": "",
-  },
-];
-
-const blogPosts = [
-  {
-    "Internal Title": "Consultation survey",
-    Slug: "consultation-survey",
-    Status: "Published",
-    "Published At": "2025-01-15",
-    "Title EN": "Consultation survey",
-    "Title BG": "Анкета за консултация",
-    "Excerpt EN":
-      "How a short questionnaire helps clarify priorities before a design conversation.",
-    "Excerpt BG":
-      "Как кратката анкета помага да се изяснят приоритетите преди дизайнерски разговор.",
-    "Body EN":
-      "A short note on preparing for an interior consultation — what to gather, what to decide later, and how visual references help the process.\n\n## Before we meet\n\n- Floor plans or approximate room dimensions\n- Photos of the existing space\n- A few references that feel close to your taste",
-    "Body BG":
-      "Кратка бележка за подготовката за интериорна консултация — какво да съберете, какво да оставите за по-късно и как визуалните референции помагат на процеса.\n\n## Преди срещата\n\n- Планове или приблизителни размери\n- Снимки на съществуващото пространство\n- Няколко референции, близки до вашия вкус",
   },
 ];
 

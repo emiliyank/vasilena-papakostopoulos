@@ -28,13 +28,23 @@ Base CDN: `https://static.wixstatic.com/media/`
 | Site settings / About | migrated draft | provisional | needs stakeholder approval |
 | Services (5) | migrated draft | provisional | |
 | Projects (8) | migrated draft | provisional | Form, Balance, Rhythm, Variations, Scale, Heritage, Unity, Potential |
-| Blog posts | pending crawl | pending | |
+| Blog posts (4 from Wix) | migrated | provisional | Seed: `src/data/seeds/blog-posts.json` → Airtable via seed script |
 | Prices | migrated to Airtable from Wix/mocks | provisional EN | Source: https://papakostopoulosvs.wixsite.com/vassilena-papakost-1/services-4 |
 | Consultation survey URL | confirmed | — | https://docs.google.com/forms/d/10-k1YJ33jze-Rqq_tgzdT4KgvFDKSjsr1NXKvU7BsLo/viewform |
 | Initial Airtable records | seeded from mocks | provisional | Via `scripts/seed-airtable-from-mocks.mjs` |
+| Legacy placeholder `consultation-survey` | removed from seed | — | Archive/delete leftover Airtable row via `/admin` if still present |
+
+### Migrated blog slugs
+
+| Slug | Wix source |
+| --- | --- |
+| `where-do-we-start` | `/portfolio/post/where-do-we-start` |
+| `interior-design-and-3d-visualisation-what-is-the-diference` | `/portfolio/post/interior-design-and-3d-visualisation-what-is-the-diference` |
+| `interior-styling-why-the-smallest-details-turn-a-space-into-a-true-home` | `/portfolio/post/interior-styling-why-the-smallest-details-turn-a-space-into-a-true-home` |
+| `how-the-process-of-creating-an-interior-design-works` | `/portfolio/post/how-the-process-of-creating-an-interior-design-works` |
 
 ## Redirect inventory
 
-Document every valuable Wix URL → new localized route before launch. Known project pattern:
+See [REDIRECTS.md](REDIRECTS.md). Known project pattern:
 
 `/portfolio/portfolio-collections/portfolio/[slug]` → `/en/projects/[slug]` (and BG equivalent).

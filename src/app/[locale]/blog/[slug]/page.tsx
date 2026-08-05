@@ -1,97 +1,45 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ArticleBody } from "@/components/blog/ArticleBody";
 import { Container } from "@/components/ui/Container";
 import { getBlogPostBySlug } from "@/lib/content";
 import { getLocalizedValue, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { blogPath } from "@/lib/i18n/paths";
-import type { RichTextBlock, RichTextInline } from "@/types/rich-text";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 type BlogPostPageProps = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
-function renderInline(nodes: RichTextInline[], keyPrefix: string) {
-  return nodes.map((node, index) => {
-    const key = `${keyPrefix}-${index}`;
-    if (node.type === "link") {
-      return (
-        <a key={key} href={node.href} className="underline underline-offset-2">
-          {renderInline(node.children, key)}
-        </a>
-      );
-    }
-    const className = [
-      node.marks?.includes("bold") ? "font-semibold" : "",
-      node.marks?.includes("italic") ? "italic" : "",
-      node.marks?.includes("underline") ? "underline" : "",
-    ]
-      .filter(Boolean)
-      .join(" ");
-    return (
-      <span key={key} className={className || undefined}>
-        {node.text}
-      </span>
-    );
+export async function generateMetadata({ params }: BlogPostPageProps) {
+  const { locale: rawLocale, slug } = await params;
+  if (!isLocale(rawLocale)) return {};
+  const locale = rawLocale as Locale;
+  const post = await getBlogPostBySlug(slug);
+  if (!post) return {};
+  const title = getLocalizedValue(post.seoTitle ?? post.title, locale);
+  const description = getLocalizedValue(post.seoDescription ?? post.excerpt, locale);
+  return buildPageMetadata({
+    locale,
+    title,
+    description,
+    path: `/blog/${post.slug}`,
+    image: post.coverImage?.src,
   });
 }
 
-function renderBlock(block: RichTextBlock, index: number) {
-  switch (block.type) {
-    case "paragraph":
-      return (
-        <p key={index} className="text-base leading-relaxed text-[var(--color-muted)]">
-          {renderInline(block.children, `p-${index}`)}
-        </p>
-      );
-    case "heading":
-      return (
-        <h2
-          key={index}
-          className="pt-4 font-[family-name:var(--font-display)] text-3xl text-[var(--color-ink)]"
-        >
-          {renderInline(block.children, `h-${index}`)}
-        </h2>
-      );
-    case "bulletList":
-      return (
-        <ul key={index} className="list-disc space-y-2 pl-5 text-[var(--color-muted)]">
-          {block.items.map((item, itemIndex) => (
-            <li key={itemIndex}>{renderInline(item, `ul-${index}-${itemIndex}`)}</li>
-          ))}
-        </ul>
-      );
-    case "numberedList":
-      return (
-        <ol key={index} className="list-decimal space-y-2 pl-5 text-[var(--color-muted)]">
-          {block.items.map((item, itemIndex) => (
-            <li key={itemIndex}>{renderInline(item, `ol-${index}-${itemIndex}`)}</li>
-          ))}
-        </ol>
-      );
-    case "quote":
-      return (
-        <blockquote
-          key={index}
-          className="border-l border-[var(--color-line)] pl-4 text-[var(--color-muted)] italic"
-        >
-          {renderInline(block.children, `q-${index}`)}
-        </blockquote>
-      );
-    case "image":
-      return (
-        <figure key={index} className="space-y-2">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={block.src} alt={block.alt} className="w-full" />
-          {block.caption ? (
-            <figcaption className="text-sm text-[var(--color-muted)]">{block.caption}</figcaption>
-          ) : null}
-        </figure>
-      );
-    default:
-      return null;
-  }
+function formatDate(value: string, locale: Locale): string {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return new Intl.DateTimeFormat(locale === "bg" ? "bg-BG" : "en-GB", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(date);
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -107,6 +55,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const dictionary = getDictionary(locale);
   const body = getLocalizedValue(post.body, locale);
+  const dateLabel = formatDate(post.publishedAt, locale);
+  const cover = post.coverImage;
 
   return (
     <main>
@@ -120,9 +70,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <h1 className="mt-6 max-w-3xl font-[family-name:var(--font-display)] text-5xl text-[var(--color-ink)]">
           {getLocalizedValue(post.title, locale)}
         </h1>
-        <p className="mt-4 text-sm text-[var(--color-muted)]">{post.publishedAt}</p>
-        <div className="mt-10 max-w-3xl space-y-5">
-          {body.blocks.map((block, index) => renderBlock(block, index))}
+        {dateLabel ? <p className="mt-4 text-sm text-[var(--color-muted)]">{dateLabel}</p> : null}
+        {cover ? (
+          <div className="relative mt-8 aspect-[16/9] max-w-3xl overflow-hidden bg-[var(--color-surface)]">
+            <Image
+              src={cover.src}
+              alt={getLocalizedValue(cover.alt, locale)}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 768px"
+              priority
+            />
+          </div>
+        ) : null}
+        <div className="mt-10">
+          <ArticleBody document={body} />
         </div>
       </Container>
     </main>
