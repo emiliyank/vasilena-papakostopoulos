@@ -4,8 +4,10 @@ Create a new base (suggested name: **Vassilena Portfolio**). Use the exact field
 
 Create a [personal access token](https://airtable.com/create/tokens) with:
 
-- Scopes: `data.records:read`, `schema.bases:read`
+- Scopes: `data.records:read`, `data.records:write`, `schema.bases:read`
 - Access: only this base
+
+Public pages only need read access. The `/admin` dashboard needs **write** (and attachment upload) so editors can create/update/delete records and replace images. Keep the token server-only — never put it in `NEXT_PUBLIC_*` variables.
 
 Then copy into `.env.local`:
 

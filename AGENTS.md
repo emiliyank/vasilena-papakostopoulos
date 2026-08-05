@@ -18,8 +18,9 @@
 
 - Keep Airtable response types inside `src/lib/airtable`. UI uses normalized models from `src/types`.
 - Never put secrets in source or `NEXT_PUBLIC_*` variables.
-- Prefer server components; client components only for interaction (menu, form, lightbox, language switcher).
+- Prefer server components; client components only for interaction (menu, form, lightbox, language switcher, admin forms).
 - Localized UI strings live in `src/lib/i18n` dictionaries; editorial copy comes from content models.
+- Admin CMS lives at `/admin` (Auth.js Credentials); not linked from the public site. Writes go to Airtable; public reads stay Published-only.
 - Finish coherent tasks with `npm run lint`, `npm run typecheck`, relevant tests, and `npm run build` when practical.
 
 ## Commands
@@ -30,6 +31,7 @@ npm run lint
 npm run typecheck
 npm run test
 npm run build
+npm run admin:hash-password
 ```
 
 ## Visual direction

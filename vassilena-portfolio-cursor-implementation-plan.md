@@ -2,7 +2,7 @@
 
 ## Cursor Implementation Plan
 
-**Progress note (2026-08-05):** Phase A–D largely complete (Airtable live content, lightbox, contact/Resend, SEO). Analytics/consent deferred. Phase E = migration/QA. **Phase F added:** email/password admin dashboard for content management.
+**Progress note (2026-08-05):** Phase A–D largely complete (Airtable live content, lightbox, contact/Resend, SEO). Analytics/consent deferred. Phase E = migration/QA. **Phase F:** Auth.js Credentials admin + Airtable CRUD implemented at `/admin`.
 
 ## Source website and migration reference
 
@@ -389,16 +389,16 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 
 #### Phase F — Admin dashboard (content CMS)
 
-- [ ] Confirm auth approach for a small trusted admin set (email + password).
-- [ ] Implement a protected `/admin` area that is not linked from the public site.
-- [ ] Add email/password sign-in, secure session cookies, and sign-out.
-- [ ] Restrict admin routes and write APIs to authenticated users only.
-- [ ] Build admin screens to create, edit, publish/unpublish, reorder, and delete content currently stored in Airtable (Site Settings, Services, Projects, Project Images, Prices, Blog Posts).
-- [ ] Support bilingual fields and image upload/replacement from the dashboard.
-- [ ] Keep Airtable (or the chosen store) as the system of record; the public site continues to read Published content only.
-- [ ] Add audit-friendly validation, clear error states, and basic activity logging for admin writes.
-- [ ] Document how admins log in, reset access, and edit content without using the Airtable UI.
-- [ ] Cover admin auth and CRUD flows with automated tests where practical.
+- [x] Confirm auth approach for a small trusted admin set (email + password).
+- [x] Implement a protected `/admin` area that is not linked from the public site.
+- [x] Add email/password sign-in, secure session cookies, and sign-out.
+- [x] Restrict admin routes and write APIs to authenticated users only.
+- [x] Build admin screens to create, edit, publish/unpublish, reorder, and delete content currently stored in Airtable (Site Settings, Services, Projects, Project Images, Prices, Blog Posts).
+- [x] Support bilingual fields and image upload/replacement from the dashboard.
+- [x] Keep Airtable (or the chosen store) as the system of record; the public site continues to read Published content only.
+- [x] Add audit-friendly validation, clear error states, and basic activity logging for admin writes.
+- [x] Document how admins log in, reset access, and edit content without using the Airtable UI.
+- [x] Cover admin auth and CRUD flows with automated tests where practical.
 
 ### 22. Pre-launch acceptance checklist
 
@@ -418,8 +418,8 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 - [ ] Mobile, tablet, desktop, keyboard, and screen-reader spot checks pass.
 - [ ] Performance is acceptable on image-heavy project pages.
 - [ ] Environment-variable and content-editor documentation is complete.
-- [ ] Admin users can sign in with email and password and manage site content without editing code.
-- [ ] Unauthenticated visitors cannot reach admin pages or write APIs.
+- [x] Admin users can sign in with email and password and manage site content without editing code.
+- [x] Unauthenticated visitors cannot reach admin pages or write APIs.
 
 ### 23. Decisions to finalize during implementation
 
@@ -432,8 +432,8 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 - [x] Confirm cookie-consent requirements based on the intended markets and legal advice.
 - [ ] Confirm whether Airtable attachments are temporary sources or the long-term media store.
 - [ ] Confirm who approves the final Bulgarian translations and standardized project copy.
-- [ ] Confirm admin auth provider (custom credentials vs Auth.js/Clerk/etc.) and who may receive accounts.
-- [ ] Confirm whether the admin dashboard writes through the Airtable API or migrates content into another store later.
+- [x] Confirm admin auth provider (custom credentials vs Auth.js/Clerk/etc.) and who may receive accounts.
+- [x] Confirm whether the admin dashboard writes through the Airtable API or migrates content into another store later.
 
 ### 24. Admin dashboard scope
 
@@ -441,12 +441,12 @@ Add a private content-management dashboard so a trusted admin can manage the web
 
 #### Goals
 
-- [ ] Email + password authentication for one or a few admin users.
-- [ ] Secure sessions (HTTP-only cookies); no admin secrets in `NEXT_PUBLIC_*` variables.
-- [ ] CRUD for Site Settings, Services, Projects, Project Images, Prices, and Blog Posts.
-- [ ] Publish/Draft/Archived controls that match the public site’s Published-only filtering.
-- [ ] Image upload or attachment replacement for covers, galleries, logo, and hero/about media.
-- [ ] Bilingual editing for EN/BG fields in one workflow.
+- [x] Email + password authentication for one or a few admin users.
+- [x] Secure sessions (HTTP-only cookies); no admin secrets in `NEXT_PUBLIC_*` variables.
+- [x] CRUD for Site Settings, Services, Projects, Project Images, Prices, and Blog Posts.
+- [x] Publish/Draft/Archived controls that match the public site’s Published-only filtering.
+- [x] Image upload or attachment replacement for covers, galleries, logo, and hero/about media.
+- [x] Bilingual editing for EN/BG fields in one workflow.
 - [ ] Optional later: invite/reset password, role separation, and richer media library.
 
 #### Non-goals (initial version)

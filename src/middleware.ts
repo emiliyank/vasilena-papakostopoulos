@@ -1,13 +1,18 @@
-import { NextRequest, NextResponse } from "next/server";
+import NextAuth from "next-auth";
+import { NextResponse } from "next/server";
 
+import { authConfig } from "@/auth.config";
 import { defaultLocale, isLocale } from "@/lib/i18n/config";
 
-export function middleware(request: NextRequest) {
+const { auth } = NextAuth(authConfig);
+
+export default auth((request) => {
   const { pathname } = request.nextUrl;
 
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
+    pathname.startsWith("/admin") ||
     pathname.includes(".")
   ) {
     return NextResponse.next();
@@ -21,7 +26,7 @@ export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   url.pathname = `/${defaultLocale}${pathname === "/" ? "" : pathname}`;
   return NextResponse.redirect(url);
-}
+});
 
 export const config = {
   matcher: ["/", "/((?!_next|.*\\..*).*)"],

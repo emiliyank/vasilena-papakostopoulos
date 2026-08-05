@@ -23,6 +23,10 @@ const envSchema = z
     RESEND_API_KEY: z.string().optional().transform(emptyToUndefined),
     CONTACT_TO_EMAIL: z.string().email().default("e.kadiyski@gmail.com"),
     CONTACT_FROM_EMAIL: z.string().optional().transform(emptyToUndefined),
+    AUTH_SECRET: z.string().optional().transform(emptyToUndefined),
+    ADMIN_USERS: z.string().optional().transform(emptyToUndefined),
+    ADMIN_EMAIL: z.string().optional().transform(emptyToUndefined),
+    ADMIN_PASSWORD_HASH: z.string().optional().transform(emptyToUndefined),
     NEXT_PUBLIC_GA_MEASUREMENT_ID: z.string().optional().transform(emptyToUndefined),
     NEXT_PUBLIC_CLARITY_PROJECT_ID: z.string().optional().transform(emptyToUndefined),
   })
@@ -40,6 +44,60 @@ const envSchema = z
           code: "custom",
           path: ["AIRTABLE_BASE_ID"],
           message: "AIRTABLE_BASE_ID is required when CONTENT_SOURCE=airtable",
+        });
+      }
+    }
+
+    const hasAdminUsers = Boolean(env.ADMIN_USERS);
+    const hasAdminPair = Boolean(env.ADMIN_EMAIL || env.ADMIN_PASSWORD_HASH);
+    if ((hasAdminUsers || hasAdminPair) && !env.AUTH_SECRET) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["AUTH_SECRET"],
+        message: "AUTH_SECRET is required when admin credentials are set",
+      });
+    }
+    if (env.ADMIN_EMAIL && !env.ADMIN_PASSWORD_HASH) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["ADMIN_PASSWORD_HASH"],
+        message: "ADMIN_PASSWORD_HASH is required when ADMIN_EMAIL is set",
+      });
+    }
+    if (env.ADMIN_PASSWORD_HASH && !env.ADMIN_EMAIL) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["ADMIN_EMAIL"],
+        message: "ADMIN_EMAIL is required when ADMIN_PASSWORD_HASH is set",
+      });
+    }
+    if (env.ADMIN_EMAIL) {
+      const emailCheck = z.string().email().safeParse(env.ADMIN_EMAIL);
+      if (!emailCheck.success) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["ADMIN_EMAIL"],
+          message: "ADMIN_EMAIL must be a valid email",
+        });
+      }
+    }
+    if (env.ADMIN_USERS) {
+      try {
+        const parsed = JSON.parse(
+          env.ADMIN_USERS.trim().replace(/^'(.*)'$/, "$1").replace(/^"(.*)"$/, "$1"),
+        );
+        if (!Array.isArray(parsed)) {
+          ctx.addIssue({
+            code: "custom",
+            path: ["ADMIN_USERS"],
+            message: "ADMIN_USERS must be a JSON array",
+          });
+        }
+      } catch {
+        ctx.addIssue({
+          code: "custom",
+          path: ["ADMIN_USERS"],
+          message: "ADMIN_USERS must be valid JSON",
         });
       }
     }
@@ -70,6 +128,10 @@ export function getEnv(): AppEnv {
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     CONTACT_TO_EMAIL: process.env.CONTACT_TO_EMAIL,
     CONTACT_FROM_EMAIL: process.env.CONTACT_FROM_EMAIL,
+    AUTH_SECRET: process.env.AUTH_SECRET,
+    ADMIN_USERS: process.env.ADMIN_USERS,
+    ADMIN_EMAIL: process.env.ADMIN_EMAIL,
+    ADMIN_PASSWORD_HASH: process.env.ADMIN_PASSWORD_HASH,
     NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
     NEXT_PUBLIC_CLARITY_PROJECT_ID: process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID,
   });
