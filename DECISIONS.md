@@ -17,6 +17,8 @@ Resolved product and technical choices for the Vassilena Papakostopoulos portfol
 | Custom domain / sender | Pending | Needed before production email |
 | Airtable as long-term media store | Pending | Attachments OK for migration; revisit durability |
 | Bulgarian copy approval | Pending | Confirm stakeholder before launch |
+| Admin dashboard | Planned (Phase F) | Email/password admin area to manage Airtable-backed content without code edits |
+| Admin auth provider | Pending | Custom credentials vs Auth.js / hosted auth |
 
 ## Source website
 

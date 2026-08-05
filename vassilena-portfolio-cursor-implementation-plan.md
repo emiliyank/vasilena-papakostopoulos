@@ -2,7 +2,7 @@
 
 ## Cursor Implementation Plan
 
-**Progress note (2026-08-05):** Phase A–B complete (including Airtable schema + seeded mocks). Phase C lightbox/gallery polish and Phase D contact + SEO foundations are in progress / landed. Analytics/consent remain deferred.
+**Progress note (2026-08-05):** Phase A–D largely complete (Airtable live content, lightbox, contact/Resend, SEO). Analytics/consent deferred. Phase E = migration/QA. **Phase F added:** email/password admin dashboard for content management.
 
 ## Source website and migration reference
 
@@ -387,6 +387,19 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 - [ ] Run a full link and redirect audit.
 - [ ] Complete stakeholder review in both languages.
 
+#### Phase F — Admin dashboard (content CMS)
+
+- [ ] Confirm auth approach for a small trusted admin set (email + password).
+- [ ] Implement a protected `/admin` area that is not linked from the public site.
+- [ ] Add email/password sign-in, secure session cookies, and sign-out.
+- [ ] Restrict admin routes and write APIs to authenticated users only.
+- [ ] Build admin screens to create, edit, publish/unpublish, reorder, and delete content currently stored in Airtable (Site Settings, Services, Projects, Project Images, Prices, Blog Posts).
+- [ ] Support bilingual fields and image upload/replacement from the dashboard.
+- [ ] Keep Airtable (or the chosen store) as the system of record; the public site continues to read Published content only.
+- [ ] Add audit-friendly validation, clear error states, and basic activity logging for admin writes.
+- [ ] Document how admins log in, reset access, and edit content without using the Airtable UI.
+- [ ] Cover admin auth and CRUD flows with automated tests where practical.
+
 ### 22. Pre-launch acceptance checklist
 
 - [ ] Every public page is available in English and Bulgarian.
@@ -405,6 +418,8 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 - [ ] Mobile, tablet, desktop, keyboard, and screen-reader spot checks pass.
 - [ ] Performance is acceptable on image-heavy project pages.
 - [ ] Environment-variable and content-editor documentation is complete.
+- [ ] Admin users can sign in with email and password and manage site content without editing code.
+- [ ] Unauthenticated visitors cannot reach admin pages or write APIs.
 
 ### 23. Decisions to finalize during implementation
 
@@ -417,7 +432,29 @@ Important clarification: `https://papakostopoulosvs.wixsite.com/` currently retu
 - [x] Confirm cookie-consent requirements based on the intended markets and legal advice.
 - [ ] Confirm whether Airtable attachments are temporary sources or the long-term media store.
 - [ ] Confirm who approves the final Bulgarian translations and standardized project copy.
+- [ ] Confirm admin auth provider (custom credentials vs Auth.js/Clerk/etc.) and who may receive accounts.
+- [ ] Confirm whether the admin dashboard writes through the Airtable API or migrates content into another store later.
+
+### 24. Admin dashboard scope
+
+Add a private content-management dashboard so a trusted admin can manage the website without using Airtable directly.
+
+#### Goals
+
+- [ ] Email + password authentication for one or a few admin users.
+- [ ] Secure sessions (HTTP-only cookies); no admin secrets in `NEXT_PUBLIC_*` variables.
+- [ ] CRUD for Site Settings, Services, Projects, Project Images, Prices, and Blog Posts.
+- [ ] Publish/Draft/Archived controls that match the public site’s Published-only filtering.
+- [ ] Image upload or attachment replacement for covers, galleries, logo, and hero/about media.
+- [ ] Bilingual editing for EN/BG fields in one workflow.
+- [ ] Optional later: invite/reset password, role separation, and richer media library.
+
+#### Non-goals (initial version)
+
+- [ ] Public user accounts or member login.
+- [ ] Multi-tenant agencies or complex permission matrices.
+- [ ] Replacing the public Next.js frontend with a page builder.
 
 ## Definition of done
 
-- [ ] The implementation is complete only when the bilingual site builds successfully, reads Published content securely from Airtable, sends validated inquiries, exposes no secrets, meets the agreed visual direction, passes the quality checks above, and has a documented path for replacing temporary images and connecting the future custom domain.
+- [ ] The implementation is complete only when the bilingual site builds successfully, reads Published content securely from Airtable (or the agreed store), sends validated inquiries, exposes no secrets, meets the agreed visual direction, passes the quality checks above, has a documented path for replacing temporary images and connecting the future custom domain, and — once Phase F is in scope for launch — allows authenticated admins to manage content through the dashboard.
