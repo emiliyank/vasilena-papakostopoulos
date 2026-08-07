@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { AccordionEditLink, AdminAccordionItem } from "@/components/admin/AdminAccordion";
 import { AdminForm } from "@/components/admin/AdminForm";
 import { AdminNotice } from "@/components/admin/AdminNotice";
+import { ConfirmDeleteForm } from "@/components/admin/ConfirmDeleteForm";
 import {
   AdminPageHeader,
   AdminTable,
@@ -143,12 +144,12 @@ function ProjectEditor({ project }: { project?: Project }) {
         <FormActions />
       </AdminForm>
       {project ? (
-        <form action={deleteProjectAction} className="mt-6">
-          <input type="hidden" name="id" value={project.id} />
-          <button type="submit" className="border border-red-700 px-4 py-2 text-sm text-red-800">
-            Delete project
-          </button>
-        </form>
+        <ConfirmDeleteForm
+          action={deleteProjectAction}
+          recordId={project.id}
+          label="Delete project"
+          confirmMessage="Delete this project? This cannot be undone."
+        />
       ) : null}
     </>
   );

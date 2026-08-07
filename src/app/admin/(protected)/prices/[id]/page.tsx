@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { AdminForm } from "@/components/admin/AdminForm";
+import { ConfirmDeleteForm } from "@/components/admin/ConfirmDeleteForm";
 import {
   AdminPageHeader,
   BilingualFields,
@@ -87,12 +88,12 @@ function PriceEditor({ price }: { price?: PriceItem }) {
         <FormActions />
       </AdminForm>
       {price ? (
-        <form action={deletePriceAction} className="mt-6">
-          <input type="hidden" name="id" value={price.id} />
-          <button type="submit" className="border border-red-700 px-4 py-2 text-sm text-red-800">
-            Delete package
-          </button>
-        </form>
+        <ConfirmDeleteForm
+          action={deletePriceAction}
+          recordId={price.id}
+          label="Delete package"
+          confirmMessage="Delete this package? This cannot be undone."
+        />
       ) : null}
     </>
   );

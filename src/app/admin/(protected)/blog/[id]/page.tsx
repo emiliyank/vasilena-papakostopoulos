@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { AdminForm } from "@/components/admin/AdminForm";
+import { ConfirmDeleteForm } from "@/components/admin/ConfirmDeleteForm";
 import {
   AdminPageHeader,
   BilingualFields,
@@ -104,12 +105,12 @@ function BlogEditor({ post }: { post?: AdminBlogPost }) {
         <FormActions />
       </AdminForm>
       {post ? (
-        <form action={deleteBlogAction} className="mt-6">
-          <input type="hidden" name="id" value={post.id} />
-          <button type="submit" className="border border-red-700 px-4 py-2 text-sm text-red-800">
-            Delete post
-          </button>
-        </form>
+        <ConfirmDeleteForm
+          action={deleteBlogAction}
+          recordId={post.id}
+          label="Delete post"
+          confirmMessage="Delete this post? This cannot be undone."
+        />
       ) : null}
     </>
   );

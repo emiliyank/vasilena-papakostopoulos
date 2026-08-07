@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { AdminForm } from "@/components/admin/AdminForm";
+import { ConfirmDeleteForm } from "@/components/admin/ConfirmDeleteForm";
 import {
   AdminPageHeader,
   BilingualFields,
@@ -66,12 +67,12 @@ function ServiceEditor({ service }: { service?: Service }) {
         <FormActions />
       </AdminForm>
       {service ? (
-        <form action={deleteServiceAction} className="mt-6">
-          <input type="hidden" name="id" value={service.id} />
-          <button type="submit" className="border border-red-700 px-4 py-2 text-sm text-red-800">
-            Delete service
-          </button>
-        </form>
+        <ConfirmDeleteForm
+          action={deleteServiceAction}
+          recordId={service.id}
+          label="Delete service"
+          confirmMessage="Delete this service? This cannot be undone."
+        />
       ) : null}
     </>
   );
