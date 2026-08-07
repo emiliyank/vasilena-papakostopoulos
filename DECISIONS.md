@@ -11,7 +11,7 @@ Resolved product and technical choices for the Vassilena Papakostopoulos portfol
 | Project lightbox | Yes | Accessible overlay with prev/next and Escape |
 | Package manager | npm | Commit `package-lock.json` |
 | Content source (dev) | Airtable when configured | `CONTENT_SOURCE=airtable`; mocks remain as fallback |
-| Cookie consent | Deferred | Add before analytics go live in production markets |
+| Cookie consent | Deferred | Required before GA/Clarity; Vercel Analytics is cookieless Web Analytics |
 | Temporary images | Wix-hosted assets | Track replacements in `CONTENT-MIGRATION.md` |
 | Prices IA | Dedicated localized pages | `/en/prices` and `/bg/prices` (not homepage-only) |
 | Custom domain / sender | Pending | Needed before production email |

@@ -16,6 +16,7 @@
     "seed:airtable": "node --env-file=.env.local scripts/seed-airtable-from-mocks.mjs"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "bcryptjs": "^3.0.3",
     "next": "16.2.12",
     "next-auth": "^5.0.0-beta.32",

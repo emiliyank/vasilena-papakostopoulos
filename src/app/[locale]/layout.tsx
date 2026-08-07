@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/next";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -88,6 +89,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           {children}
         </div>
         <Footer locale={locale} settings={settings} dictionary={dictionary} />
+        <Analytics />
       </body>
     </html>
   );
